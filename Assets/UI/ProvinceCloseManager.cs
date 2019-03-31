@@ -17,11 +17,6 @@ public class ProvinceCloseManager : MonoBehaviour
     }
     public void OnClick()
     {
-        MyCanvas.SetActive("Population", false);
         MyCanvas.SetActive("ProvinceUIBackground", false);
-        MyCanvas.SetActive("ProvinceClose", false);
-        MyCanvas.SetActive("ProvinceName", false);
-        MyCanvas.SetActive("POP_UI", false);
-        MyCanvas.SetActive("ProvinceIncome", false);
     }
 }
