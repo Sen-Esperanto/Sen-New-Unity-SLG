@@ -28,12 +28,7 @@ public class Province1Manager : MonoBehaviour
 
     public void OnClick(int number)
     {
-        MyCanvas.SetActive("Population", true);
         MyCanvas.SetActive("ProvinceUIBackground", true);
-        MyCanvas.SetActive("ProvinceClose", true);
-        MyCanvas.SetActive("ProvinceName", true);
-        MyCanvas.SetActive("POP_UI", true);
-        MyCanvas.SetActive("ProvinceIncome", true);
         switch (number)
         {
             case 1: Choosing_ProvinceNumber = 1; break;
