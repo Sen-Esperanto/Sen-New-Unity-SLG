@@ -35,8 +35,8 @@ public class TurnEndManager : MonoBehaviour
 
 
 
-    public static int[] Market_Sorted = new int[Number_of_Country];
-    public static int[][] Influence_Sorted = new int[Number_of_Country][];
+    public static int[] Market_Sorted = new int[Number_of_Country];//市場になる国名
+    public static int[][] Influence_Sorted = new int[Number_of_Country][];//左は市場になる国名　右は供給する国名
 
     public static int[] Market_Min_to_MAX = new int[Number_of_Country];
     //１番目に小さい数が入っていた場所、２番目に小さい数が入っていた場所…一番大きな数が入っていた場所　を記す配列
@@ -56,9 +56,17 @@ public class TurnEndManager : MonoBehaviour
                 }
 
         //ヌル参照エラー回避のためにジャグ配列をnewしておく
-        for(int i = 1; i < Resources_Market_Manager.Market_Influence[i].Length; i++)
+        for(int i = 1; i < Number_of_Country; i++)
         {
-
+            Influence_Sorted[i] = new int[Number_of_Country];
+            for(int j =1; j <Number_of_Country; j++)
+            {
+                Influence_Sorted[i][j] = 0;
+            }
+        }
+        for(int i =1; i <Number_of_Country; i++)
+        {
+            Market_Sorted[i] = 0;
         }
 
         //プロビ支配国家初期設定
@@ -67,7 +75,7 @@ public class TurnEndManager : MonoBehaviour
 
     public static void Market(int i)//iは生産物名
     {
-        Resources_Market_Manager.Sort(Resources_Market_Manager.Market_Size[i], Resources_Market_Manager.Market_Influence[i], Market_Sorted, Influence_Sorted);
+        Resources_Market_Manager.Sort(Resources_Market_Manager.Market_Size[i],Resources_Market_Manager.Market_Influence[i], Market_Sorted, Influence_Sorted);
         //この時点でMarket_Sortedには生産物iの市場サイズが小さい順に、Influence_Sortedにはそれに連動するようにそれぞれの市場への国家の影響力が載る
         //またMarket_Min_to_MAXには最小値の入って居た場所、…という風な配列が入っている
 

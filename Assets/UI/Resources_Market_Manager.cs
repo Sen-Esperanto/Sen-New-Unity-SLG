@@ -106,15 +106,31 @@ public class Resources_Market_Manager : MonoBehaviour
         
     }
 
-    public static void Sort(int[] Main_list , int[][] Sub_list , int[]Main_list_Sorted , int[][] Sub_list_Sorted)//メインはソート元(市場)　サブはそれに連動させるもの(影響力)
+    public static void Sort(int[]Main_list,int[][]Sub_list,int[]Main_list_Sorted , int[][] Sub_list_Sorted)
     {
+        //メインはソート元(市場)　サブはそれに連動させるもの(影響力)
+        //Main_list[市場にになる国] Sub_list[市場になる国][供給する国]
         int k;
         int j = 0;
 
-        int[] Main_list_clone = Market_Size.Clone() as int[];
-        int[][] Sub_list_clone = Market_Influence.Clone() as int[][];
+        int[] Main_list_clone = new int[TurnEndManager.Number_of_Country];//産物を抜いて市場国のサイズのみ
+        for(int i = 1; i < TurnEndManager.Number_of_Country; i++)
+        {
+            Main_list_clone[i] = Main_list[i];//クローン作成
+        }
+        //Main_list_clone = Main_list.Clone() as int[];
 
-        for (int h = 1; h < Main_list_clone.Length; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
+        int[][] Sub_list_clone = new int[TurnEndManager.Number_of_Country][];
+        for(int i =1; i < TurnEndManager.Number_of_Country; i++)
+        {
+            for(j = 1; j<TurnEndManager.Number_of_Country; j++)
+            {
+                Sub_list_clone[i][j] = Sub_list[i][j];//クローン作成
+            }
+        }
+        //Sub_list_clone = Sub_list.Clone() as int[][];
+
+        for (int h = 1; h < Market_Size.Length; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
         {
             k = Main_list_clone.Min();
             if (k != 1000)
@@ -146,6 +162,27 @@ public class Resources_Market_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for(int i = 1; i<Number_of_Kind_of_Resources; i++)
+        {
+            Market_Size[i] = new int[TurnEndManager.Number_of_Country];
+            for(int j = 1; j < TurnEndManager.Number_of_Country; j++)
+            {
+                Market_Size[i][j] = 0;//とりあえずMarket_Sizeには0を代入
+            }
+        }
+        for (int i = 1; i < Number_of_Kind_of_Resources; i++)
+        {
+            Market_Influence[i] = new int[TurnEndManager.Number_of_Country][];
+            for (int j = 1; j < TurnEndManager.Number_of_Country; j++)
+            {
+                    Market_Influence[i][j] = new int[TurnEndManager.Number_of_Country];
+                for (int k = 1; k < TurnEndManager.Number_of_Country; k++)
+                {
+                    Market_Influence[i][j][k] = 0;//Influenceにもとりあえず０を代入
+                }
+            }
+        }
+
         Market_Size[0] = new int[] { };//必ず0
         Market_Size[1] = new int[] {0,30 };//穀物の市場レベル、左列は0、２番目(１)は陽帝国…と続く
         Market_Size[2] = new int[] { };
