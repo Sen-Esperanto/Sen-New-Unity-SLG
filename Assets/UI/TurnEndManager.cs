@@ -55,6 +55,12 @@ public class TurnEndManager : MonoBehaviour
 
                 }
 
+        //ヌル参照エラー回避のためにジャグ配列をnewしておく
+        for(int i = 1; i < Resources_Market_Manager.Market_Influence[i].Length; i++)
+        {
+
+        }
+
         //プロビ支配国家初期設定
         Donating_Country[1] = 1; //1は陽帝国
     }
@@ -75,6 +81,7 @@ public class TurnEndManager : MonoBehaviour
                     Resources_Market_Manager.Saving_Resources[i, j] = Resources_Market_Manager.Saving_Resources[i, j] - Influence_Sorted[k][j];
                     //その後資金を追加
                     YOUMoneyManager.Money_in_Country[j] = Price_for_Calculate[k] * Influence_Sorted[k][j];
+
                 }
                 else//もし資源に余裕がないなら
                 {
@@ -91,7 +98,7 @@ public class TurnEndManager : MonoBehaviour
     public void OnClick()
     {
        //収入を国庫に加算、最初にやる
-        YOUMoneyManager.YOUmoney = YOUMoneyManager.YOUmoney + ProvinceIncomeManager.Province_Income_List[1];//YOUが持ってる領土番号
+        //YOUMoneyManager.YOUmoney = YOUMoneyManager.YOUmoney + ProvinceIncomeManager.Province_Income_List[1];//YOUが持ってる領土番号
         //資源を国庫に加算　市場処理の前にやる
         for (int i = 1; i < Resources_Market_Manager.Number_of_Kind_of_Resources; i++)//iは資源名でありそれを生産する職名でもある
         {
