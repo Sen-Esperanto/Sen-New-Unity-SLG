@@ -123,33 +123,37 @@ public class Resources_Market_Manager : MonoBehaviour
         int[][] Sub_list_clone = new int[TurnEndManager.Number_of_Country][];
         for(int i =1; i < TurnEndManager.Number_of_Country; i++)
         {
-            for(j = 1; j<TurnEndManager.Number_of_Country; j++)
+            Sub_list_clone[i] = new int[TurnEndManager.Number_of_Country];
+            for(int i2 = 1; i2<TurnEndManager.Number_of_Country; i2++)
             {
-                Sub_list_clone[i][j] = Sub_list[i][j];//クローン作成
+                Sub_list_clone[i][i2] = Sub_list[i][i2];//クローン作成
             }
         }
         //Sub_list_clone = Sub_list.Clone() as int[][];
 
-        for (int h = 1; h < Market_Size.Length; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
+        Main_list_clone[0] = 10000;
+
+        for (int h = 0; h < TurnEndManager.Number_of_Country; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
         {
             k = Main_list_clone.Min();
-            if (k != 1000)
+            if (k != 10000)
             {
                 //最小値と一致するものを探索してソイツをSortedの先頭に持ってくる、Subの方も連動させる
                 //
-                for (int i = 1; i < Main_list.Length; i++)
+                for (int i = 1; i < TurnEndManager.Number_of_Country; i++)
                 {
                     if (Main_list[i] == k)
                     {
                         j = j + 1;
-
+                        Debug.Log(k.ToString() + " " + j.ToString());
                         Main_list_Sorted[j] = Main_list_clone[i];//最小値はSortedの1番に　２番目に小さい値は２番に
                         for (int m = 1; m < Sub_list_clone[i].Length; m++)
                         {
                             Sub_list_Sorted[j][m] = Sub_list_clone[i][m];//Mainと連動
                         }
-                        Main_list_clone[i] = 1000;
+                        Main_list_clone[i] = 10000;
                         TurnEndManager.Market_Min_to_MAX[j] = i;//最小値の入って居た場所を１，２…と代入していく
+                        break;
                     }
                 }
             }
@@ -183,17 +187,21 @@ public class Resources_Market_Manager : MonoBehaviour
             }
         }
 
-        Market_Size[0] = new int[] { };//必ず0
-        Market_Size[1] = new int[] {0,30 };//穀物の市場レベル、左列は0、２番目(１)は陽帝国…と続く
-        Market_Size[2] = new int[] { };
+        //Market_Size[0] = new int[TurnEndManager.Number_of_Country];//必ず0
+        Market_Size[1][1] = 25;//穀物の陽帝国の市場レベル
+        Market_Size[1][2] = 1;
+        Market_Size[1][3] = 1;
+        Market_Size[1][4] = 1;
+        Market_Size[1][5] = 1;
 
 
-        Market_Influence[0] = new int[][] { };//必ず０　左列もずっと０
 
-        Market_Influence[1] = new int[][] { };//穀物
-        Market_Influence[1][0] = new int[] { };//ここも０
-        Market_Influence[1][1] = new int[] {0,100 };//穀物の陽帝国における市場に働く影響力(左列は相変わらず0)
-        //{0,100}なら陽帝国だけが100%の影響力を持つ
+        //Market_Influence[0] = new int[][] { };//必ず０　左列もずっと０
+
+        //Market_Influence[1] = new int[][] { };//穀物
+        //Market_Influence[1][0] = new int[TurnEndManager.Number_of_Country];//ここも０
+        Market_Influence[1][1][1] = 40;//穀物の陽帝国における市場に働く影響力(左列は相変わらず0)
+        //40の影響力を持ってる、市場サイズを見ると100%の需要を得ている
 
 
 

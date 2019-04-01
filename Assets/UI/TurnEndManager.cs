@@ -35,10 +35,10 @@ public class TurnEndManager : MonoBehaviour
 
 
 
-    public static int[] Market_Sorted = new int[Number_of_Country];//市場になる国名
-    public static int[][] Influence_Sorted = new int[Number_of_Country][];//左は市場になる国名　右は供給する国名
+    public static int[] Market_Sorted = new int[Number_of_Country+1];//市場になる国名
+    public static int[][] Influence_Sorted = new int[Number_of_Country+1][];//左は市場になる国名　右は供給する国名
 
-    public static int[] Market_Min_to_MAX = new int[Number_of_Country];
+    public static int[] Market_Min_to_MAX = new int[Number_of_Country+1];
     //１番目に小さい数が入っていた場所、２番目に小さい数が入っていた場所…一番大きな数が入っていた場所　を記す配列
     //処理に用いる
     void Start()
@@ -56,15 +56,15 @@ public class TurnEndManager : MonoBehaviour
                 }
 
         //ヌル参照エラー回避のためにジャグ配列をnewしておく
-        for(int i = 1; i < Number_of_Country; i++)
+        for(int i = 1; i < Number_of_Country + 1; i++)
         {
-            Influence_Sorted[i] = new int[Number_of_Country];
+            Influence_Sorted[i] = new int[Number_of_Country +1];
             for(int j =1; j <Number_of_Country; j++)
             {
                 Influence_Sorted[i][j] = 0;
             }
         }
-        for(int i =1; i <Number_of_Country; i++)
+        for(int i =1; i <Number_of_Country+1; i++)
         {
             Market_Sorted[i] = 0;
         }
@@ -88,13 +88,13 @@ public class TurnEndManager : MonoBehaviour
                     //まず貯蓄資源を減らす
                     Resources_Market_Manager.Saving_Resources[i, j] = Resources_Market_Manager.Saving_Resources[i, j] - Influence_Sorted[k][j];
                     //その後資金を追加
-                    YOUMoneyManager.Money_in_Country[j] = Price_for_Calculate[k] * Influence_Sorted[k][j];
+                    YOUMoneyManager.Money_in_Country[j] = YOUMoneyManager.Money_in_Country[i] + Price_for_Calculate[k] * Influence_Sorted[k][j];
 
                 }
                 else//もし資源に余裕がないなら
                 {
                     //持っている限り売って
-                    YOUMoneyManager.Money_in_Country[j] = Price_for_Calculate[k] * Resources_Market_Manager.Saving_Resources[i, j];
+                    YOUMoneyManager.Money_in_Country[j] = YOUMoneyManager.Money_in_Country[i] + Price_for_Calculate[k] * Resources_Market_Manager.Saving_Resources[i, j];
                     //貯蓄資源を０にする
                     Resources_Market_Manager.Saving_Resources[i, j] = 0;
                     

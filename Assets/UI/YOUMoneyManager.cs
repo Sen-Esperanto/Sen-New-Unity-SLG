@@ -21,6 +21,6 @@ public class YOUMoneyManager : MonoBehaviour
     {
         Text YOUMoney_text = YOUmoney_object.GetComponent<Text>();
 
-        YOUMoney_text.text = "国庫：" + YOUmoney.ToString();
+        YOUMoney_text.text = "国庫：" + Money_in_Country[First_Choose_Country_UI.Playing_Country].ToString();
     }
 }
