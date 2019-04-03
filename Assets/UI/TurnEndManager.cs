@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class TurnEndManager : MonoBehaviour
 {
     public static int Past_Year_When_Turnend = 1;
+    public static int MAX_Turn = 1000;
 
     public GameObject TurnNumber_Object = null;
 

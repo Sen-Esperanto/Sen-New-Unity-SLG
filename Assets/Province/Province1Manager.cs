@@ -8,8 +8,8 @@ public class Province1Manager : MonoBehaviour
     public static string Province1Name = "東京";
     public static int Choosing_ProvinceNumber = 1;
     public static int Grain_Resources = 15;
-    public static int Number_of_Province = 100;
-    
+    public const int Number_of_Province = 100;
+    public static bool[][] Province_Next_Door = new bool [Number_of_Province][];//プロビ隣接判定
 
 
 
@@ -21,9 +21,16 @@ public class Province1Manager : MonoBehaviour
         this.targetText = this.GetComponent<Text>(); // <---- 追加3
         this.targetText.text = Province1Name; // <---- 追加4
     }
-        void Start()
+
+    void Start()
+    {
+        for (int i = 0; i < Number_of_Province; i++)
         {
+            Province_Next_Door[i] = new bool[Number_of_Province];
         }
+        Province_Next_Door[1][2] = true;//プロビ１とプロビ２が隣接
+        Province_Next_Door[2][1] = true;
+    }
 
 
     public void OnClick(int number)
