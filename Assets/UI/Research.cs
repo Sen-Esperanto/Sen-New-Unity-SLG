@@ -49,7 +49,22 @@ public class Research : MonoBehaviour
             
         }
     }
+
     public GameObject Research_Object = null;
+
+    public void Print_Research()
+    {
+        Text Research_text = Research_Object.GetComponent<Text>();
+        if (Now_Research_Number == 0)
+        {
+            Research_text.text = "発明\nなし";
+        }
+        if (Now_Research_Number == 1)
+        {
+            Research_text.text = "発明\n機械化農業";
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,16 +77,8 @@ public class Research : MonoBehaviour
 
         Research_Decide(1);
 
+        Print_Research();
 
-        Text Research_text = Research_Object.GetComponent<Text>();
-        if (Now_Research_Number == 0)
-        {
-            Research_text.text = "発明\nなし";
-        }
-        if (Now_Research_Number == 1)
-        {
-            Research_text.text = "発明\n機械化農業";
-        }
     }
 
     // Update is called once per frame

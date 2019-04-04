@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class TurnEndManager : MonoBehaviour
 {
+    public GameObject gameobject;
     public static int Past_Year_When_Turnend = 1;
     public static int MAX_Turn = 1000;
 
@@ -270,7 +271,9 @@ public class TurnEndManager : MonoBehaviour
             }
         }
 
-
+        //技術設定
+        Research.Research_Decide(Now_Turn_Number);
+        gameobject.GetComponent<Research>().Print_Research();
 
 
         //収入計算、最後にやる

@@ -135,17 +135,17 @@ public class Resources_Market_Manager : MonoBehaviour
 
         for (int h = 0; h < TurnEndManager.Number_of_Country; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
         {
-            k = Main_list_clone.Min();
+            k = Math_Myself.Min(Main_list_clone);
             if (k != 10000)
             {
                 //最小値と一致するものを探索してソイツをSortedの先頭に持ってくる、Subの方も連動させる
                 //
                 for (int i = 1; i < TurnEndManager.Number_of_Country; i++)
                 {
-                    if (Main_list[i] == k)
+                    if (Main_list_clone[i] == k)
                     {
                         j = j + 1;
-                        Debug.Log(k.ToString() + " " + j.ToString());
+                        //Debug.Log(k.ToString() + " " + j.ToString() + "　" + Main_list_clone[1].ToString());
                         Main_list_Sorted[j] = Main_list_clone[i];//最小値はSortedの1番に　２番目に小さい値は２番に
                         for (int m = 1; m < Sub_list_clone[i].Length; m++)
                         {
