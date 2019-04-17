@@ -133,7 +133,7 @@ public class Resources_Market_Manager : MonoBehaviour
 
         Main_list_clone[0] = 10000;
 
-        for (int h = 0; h < TurnEndManager.Number_of_Country; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
+        for (int h = 1; h < TurnEndManager.Number_of_Country; h++)//下のことを配列の長さ分(市場の数の分)繰り返す
         {
             k = Math_Myself.Min(Main_list_clone);
             if (k != 10000)

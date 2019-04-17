@@ -11,6 +11,7 @@ public class TurnEndManager : MonoBehaviour
     public static int Past_Year_When_Turnend = 1;
     public static int MAX_Turn = 1000;
 
+
     public GameObject TurnNumber_Object = null;
 
     //ターン終了時に使うものとそれに関連する国家の補正の変数置き場
@@ -271,6 +272,36 @@ public class TurnEndManager : MonoBehaviour
             }
         }
 
+        int tech = 0;
+        int Percent_Tech = 0;
+        //技術の取得者の設定
+        for(int i =1; i < Number_of_Country; i++)
+        {
+            tech = tech + Research.Now_Research_Percent[i];//確率度合いを全部足す
+        }
+        if(tech == 0)
+        {
+            //誰も投資しなかったらどうなるか
+        }
+        if(tech == 1)
+        {
+            Percent_Tech = 0;
+        }
+        if (tech > 1)
+        {
+            System.Random r3 = new System.Random();
+            Percent_Tech = r3.Next(tech - 1);//０～度合全部の総和-1の中でランダム
+            int t2 = 0;
+            for (int i = 1; i < Number_of_Country; i++)
+            {
+                t2 = t2 + Research.Now_Research_Percent[i];
+                if (t2 > Percent_Tech)
+                {
+                    Research.Research_Get_Country[Research.Now_Research_Number] = i;
+                    break;
+                }
+            }
+        }
         //技術設定
         Research.Research_Decide(Now_Turn_Number);
         gameobject.GetComponent<Research>().Print_Research();

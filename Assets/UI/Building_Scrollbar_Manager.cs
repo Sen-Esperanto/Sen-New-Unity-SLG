@@ -7,7 +7,7 @@ public class Building_Scrollbar_Manager : MonoBehaviour
 
     public void Scroll()
     {
-        Debug.Log("scrolled");
+        //Debug.Log("scrolled");
     }
         // Start is called before the first frame update
         void Start()
